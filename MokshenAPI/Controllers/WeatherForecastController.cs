@@ -1,4 +1,4 @@
-sing Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MokshenAPI.Controllers
 {
