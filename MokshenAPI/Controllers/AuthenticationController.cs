@@ -24,6 +24,13 @@ namespace MokshenAPI.Controllers
             _userManager = userManager;
             _authManager = authManager;
         }
+        /// <summary>
+        /// Регистрирует пользователя
+        /// </summary>
+        /// <param name="userForRegistration"></param>
+        /// <returns>Токен для пользователя</returns>
+        /// <response code="200">Успешно зарегестрировалось</response>
+        /// <response code="400">Неправильная модель данных</response>
         [HttpPost("registration")]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
@@ -37,10 +44,17 @@ namespace MokshenAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            return StatusCode(201);
+            return Ok();
         }
+        /// <summary>
+        /// Логинит пользователя
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Токен для пользователя</returns>
+        /// <response code="200">Успешно авторизовалось</response>
+        /// <response code="401">Не авторизовалось, не правильное имя пользователя или пароль</response>
         [HttpPost("login")]
-        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        public async Task<IActionResult> Authenticate([FromBody] UserForLoginDto user)
         {
             if (!await _authManager.ValidateUser(user))
             {

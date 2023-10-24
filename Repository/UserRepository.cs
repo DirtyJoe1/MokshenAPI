@@ -14,11 +14,6 @@ namespace Repository
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         public UserRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
-        public async Task<List<User>> GetUsersAsync(Guid id, bool trackChanges)
-        {
-            var users = await FindByCondition(e => e.Id.Equals(id), trackChanges).ToListAsync();
-            return users;
-        }
         public async Task<User> GetUserAsync(Guid id, bool trackChanges) => await FindByCondition(e => e.Id.Equals(id), trackChanges).SingleOrDefaultAsync();
         public void CreateUser(User user)
         {

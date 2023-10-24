@@ -9,7 +9,7 @@ namespace Interfaces
 {
     public interface IAuthenticationManager
     {
-        Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
+        Task<bool> ValidateUser(UserForLoginDto userForAuth);
         Task<string> CreateToken();
     }
 }

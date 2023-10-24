@@ -9,7 +9,6 @@ namespace Interfaces
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetUsersAsync(Guid id, bool trackChanges);
         Task<User> GetUserAsync(Guid id, bool trackChanges);
         void CreateUser (User user);
         void DeleteUser(User user);

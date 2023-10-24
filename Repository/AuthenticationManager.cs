@@ -20,9 +20,9 @@ namespace Repository
             _userManager = userManager;
             _configuration = configuration;
         }
-        public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
+        public async Task<bool> ValidateUser(UserForLoginDto userForAuth)
         {
-            _user = await _userManager.FindByNameAsync(userForAuth.Username);
+            _user = await _userManager.FindByNameAsync(userForAuth.UserName);
             return (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
         }
         public async Task<string> CreateToken()
@@ -34,6 +34,7 @@ namespace Repository
         }
         private SigningCredentials GetSigningCredentials()
         {
+            var k = Environment.GetEnvironmentVariable("SECRET");
             var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"));
             var secret = new SymmetricSecurityKey(key);
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
@@ -58,8 +59,8 @@ namespace Repository
                 issuer: jwtSettings.GetSection("validIssuer").Value,
                 audience: jwtSettings.GetSection("validAudience").Value,
                 claims: claims,
-                expires:
-                DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)), signingCredentials: signingCredentials);
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
+                signingCredentials: signingCredentials);
             return tokenOptions;
         }
     }

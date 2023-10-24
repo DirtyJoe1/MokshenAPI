@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    public class UserForRegistrationDto
+    public class UserForLoginDto
     {
         [Required(ErrorMessage = "Username is required")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "Password is is required")]
-        public string Password { get; set; }
         [Required(ErrorMessage = "Email is required")]
-        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MokshenAPI.Extensions;
 using AutoMapper;
 using NLog;
+using Repository;
 
 namespace MokshenAPI
 {
@@ -22,28 +23,26 @@ namespace MokshenAPI
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
-            //services.ConfigureSqlContext(Configuration);
-            //services.ConfigureRepositoryManager();
+            services.ConfigureSqlContext(Configuration);
+            services.ConfigureRepositoryManager();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers(config =>
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
-            });
-            //.AddNewtonsoftJson()
-            //.AddXmlDataContractSerializerFormatters()
-            //.AddCustomCSVFormatter();
+            }).AddNewtonsoftJson();
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+            services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             services.AddAuthentication();
-            //services.ConfigureIdentity();
-            //services.ConfigureJWT(Configuration);
-            //services.ConfigureSwagger();
+            services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
+            services.ConfigureSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
