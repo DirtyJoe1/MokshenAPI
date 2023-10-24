@@ -24,7 +24,7 @@ namespace MokshenAPI.Controllers
             _userManager = userManager;
             _authManager = authManager;
         }
-        [HttpPost("register")]
+        [HttpPost("registration")]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);
