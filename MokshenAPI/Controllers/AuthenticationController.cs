@@ -29,7 +29,7 @@ namespace MokshenAPI.Controllers
         /// </summary>
         /// <param name="userForRegistration"></param>
         /// <returns>Токен для пользователя</returns>
-        /// <response code="200">Успешно зарегестрировалось</response>
+        /// <response code="204">Успешно зарегестрировалось</response>
         /// <response code="400">Неправильная модель данных</response>
         [HttpPost("registration")]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
@@ -44,7 +44,7 @@ namespace MokshenAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            return Ok();
+            return NoContent();
         }
         /// <summary>
         /// Логинит пользователя

@@ -17,15 +17,15 @@ namespace MokshenAPI.Extensions
     {
         public static void ConfigureCors(this IServiceCollection services) => services.AddCors(options =>
         {
-            options.AddPolicy("CorsPolicy", builder =>
-            builder.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+            options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         });
         public static void ConfigureIISIntegration(this IServiceCollection services) => services.Configure<IISOptions>(options =>{});
         public static void ConfigureLoggerService(this IServiceCollection services) => services.AddScoped<ILoggerManager, LoggerManager>();
-        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) => services
-            .AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b => b.MigrationsAssembly("MokshenAPI")));
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<RepositoryContext>(opts => opts.UseMySQL(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("MokshenAPI")));
+        }
+
         public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
         public static void ConfigureIdentity(this IServiceCollection services)
         {
@@ -38,18 +38,17 @@ namespace MokshenAPI.Extensions
                 o.Password.RequiredLength = 10;
                 o.User.RequireUniqueEmail = true;
             });
-            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole),
-            builder.Services);
+            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
             builder.AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
         }
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
-            var secretKey = Environment.GetEnvironmentVariable("SECRET");
+            //var secretKey = Environment.GetEnvironmentVariable("SECRET");
+            var secretKey = "SuperDuperSuperMokshenAPISecretKey";
             services.AddAuthentication(opt =>
             {
-                opt.DefaultAuthenticateScheme =
-               JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>

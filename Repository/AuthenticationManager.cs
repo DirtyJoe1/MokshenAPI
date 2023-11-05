@@ -34,8 +34,8 @@ namespace Repository
         }
         private SigningCredentials GetSigningCredentials()
         {
-            var k = Environment.GetEnvironmentVariable("SECRET");
-            var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"));
+            //var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"));
+            var key = Encoding.UTF8.GetBytes("SuperDuperSuperMokshenAPISecretKey");
             var secret = new SymmetricSecurityKey(key);
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
