@@ -25,7 +25,6 @@ namespace MokshenAPI.Extensions
         {
             services.AddDbContext<RepositoryContext>(opts => opts.UseMySQL(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("MokshenAPI")));
         }
-
         public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
         public static void ConfigureIdentity(this IServiceCollection services)
         {
@@ -71,7 +70,7 @@ namespace MokshenAPI.Extensions
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Mokshen API",
+                    Title = "MokshenAPI",
                     Version = "v1",
                     Description = "Mokshen API by Ruslan Ovtin",
                     TermsOfService = new Uri("https://example.com/terms"),

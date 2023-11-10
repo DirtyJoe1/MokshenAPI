@@ -6,6 +6,7 @@ using AutoMapper;
 using NLog;
 using Repository;
 using MokshenAPI.ActionFilters;
+using Microsoft.OpenApi.Models;
 
 namespace MokshenAPI
 {
@@ -62,7 +63,6 @@ namespace MokshenAPI
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -72,6 +72,10 @@ namespace MokshenAPI
                 endpoints.MapControllers();
             });
             app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "MokshenAPI");
+            });
         }
     }
 }

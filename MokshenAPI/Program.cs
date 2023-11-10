@@ -1,14 +1,23 @@
 using MokshenAPI;
+using System.Net;
 
 internal class Program
 {
-    public static void Main()
+    public static void Main(string[] args)
     {
-        CreateHostBuilder().Build().Run();
+        CreateHostBuilder(args).Build().Run();
     }
 
-    public static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder().ConfigureWebHostDefaults(webBuilder =>
+    public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
+    {
+        webBuilder.UseStartup<Startup>();
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
         {
-            webBuilder.UseStartup<Startup>();
-        });
+            webBuilder.UseUrls("http://0.0.0.0:80", "https://0.0.0.0:443");
+            webBuilder.UseKestrel(options =>
+            {
+                options.Listen(IPAddress.Any, 80);
+            });
+        }
+    });
 }
