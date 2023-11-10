@@ -12,6 +12,7 @@ namespace Repository
     {
         private RepositoryContext _repositoryContext;
         private IUserRepository _userRepository;
+        private IExerciseRepository _exerciseRepository;
         public RepositoryManager(RepositoryContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
@@ -23,6 +24,15 @@ namespace Repository
                 if (_userRepository == null)
                     _userRepository = new UserRepository(_repositoryContext);
                 return _userRepository;
+            }
+        }
+        public IExerciseRepository Exercise
+        {
+            get
+            {
+                if (_exerciseRepository == null)
+                    _exerciseRepository = new ExerciseRepository(_repositoryContext);
+                return _exerciseRepository;
             }
         }
         public Task SaveAsync() => _repositoryContext.SaveChangesAsync();

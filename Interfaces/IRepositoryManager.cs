@@ -9,6 +9,7 @@ namespace Interfaces
     public interface IRepositoryManager
     {
         IUserRepository User { get; }
+        IExerciseRepository Exercise { get; }
         Task SaveAsync();
     }
 }

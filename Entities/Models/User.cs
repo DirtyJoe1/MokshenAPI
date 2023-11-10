@@ -9,5 +9,6 @@ namespace Entities.Models
 {
     public class User : IdentityUser
     {
+        public ICollection<Exercise> CompletedExercises { get; set; }
     }
 }

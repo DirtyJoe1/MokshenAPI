@@ -9,6 +9,8 @@ namespace MokshenAPI
         public MappingProfile()
         {
             CreateMap<UserForRegistrationDto, User>();
+            CreateMap<ExerciseDto, Exercise>().ReverseMap();
+            CreateMap<ExerciseForCreationDto, Exercise>().ReverseMap();
         }
     }
 }

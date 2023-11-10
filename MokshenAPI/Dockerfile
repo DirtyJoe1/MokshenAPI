@@ -25,4 +25,4 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "MokshenAPI.dll"]
 
-ENV SECRET = "SuperDuperSuperMokshenAPISecretKey"
+ENV SECRET "SuperDuperSuperMokshenAPISecretKey"

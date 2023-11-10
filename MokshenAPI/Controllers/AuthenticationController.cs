@@ -44,6 +44,7 @@ namespace MokshenAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
+            await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
             return NoContent();
         }
         /// <summary>

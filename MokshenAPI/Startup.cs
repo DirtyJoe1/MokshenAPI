@@ -5,6 +5,7 @@ using MokshenAPI.Extensions;
 using AutoMapper;
 using NLog;
 using Repository;
+using MokshenAPI.ActionFilters;
 
 namespace MokshenAPI
 {
@@ -38,6 +39,7 @@ namespace MokshenAPI
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+            services.AddScoped<ValidateExerciseExistsAttribute>();
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             services.AddAuthentication();
             services.ConfigureIdentity();

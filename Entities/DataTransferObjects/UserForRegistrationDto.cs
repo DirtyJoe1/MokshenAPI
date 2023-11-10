@@ -15,5 +15,6 @@ namespace Entities.DataTransferObjects
         public string Password { get; set; }
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
+        public ICollection<string> Roles { get; set; }
     }
 }
