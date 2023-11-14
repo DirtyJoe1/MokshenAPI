@@ -30,6 +30,10 @@ namespace MokshenAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -48,7 +52,8 @@ namespace MokshenAPI.Migrations
                         {
                             Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                             Answer = "Test",
-                            Description = "Description"
+                            Category = "TestCategory",
+                            Description = "TestDescription"
                         });
                 });
 
@@ -140,20 +145,6 @@ namespace MokshenAPI.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "2a8a8d7b-4dfb-44ad-a990-c3bd0261ff45",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "a4902523-fdfd-487f-8d6e-d9a25f06f6f3",
-                            Name = "Student",
-                            NormalizedName = "STUDENT"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

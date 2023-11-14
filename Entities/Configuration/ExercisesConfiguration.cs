@@ -19,7 +19,8 @@ namespace Entities.Configuration
                 {
                     Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                     Answer = "Test",
-                    Description = "Description",
+                    Description = "TestDescription",
+                    Category = "TestCategory"
                 }
                 );
         }

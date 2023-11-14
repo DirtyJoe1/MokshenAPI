@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    public class ExerciseForCreationDto
+    public class ExerciseForUpdateDto
     {
         [Required(ErrorMessage = "Answer is required")]
         public string Answer { get; set; }

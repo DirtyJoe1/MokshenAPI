@@ -41,6 +41,7 @@ namespace MokshenAPI
                 options.SuppressModelStateInvalidFilter = true;
             });
             services.AddScoped<ValidateExerciseExistsAttribute>();
+            services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             services.AddAuthentication();
             services.ConfigureIdentity();

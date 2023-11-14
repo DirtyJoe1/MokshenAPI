@@ -11,6 +11,7 @@ namespace MokshenAPI
             CreateMap<UserForRegistrationDto, User>();
             CreateMap<ExerciseDto, Exercise>().ReverseMap();
             CreateMap<ExerciseForCreationDto, Exercise>().ReverseMap();
+            CreateMap<ExerciseForUpdateDto, Exercise>().ReverseMap();
         }
     }
 }
